@@ -21,24 +21,25 @@ This should also work for all other models.
 You may also adapt the settings in the main sketch file.
 The digital input pins may be HIGH or LOW active and can be set in Config.h
 
-PIN  |  FUNCTION
-----------------
-A0   |  Throllte
-A1   |  Yaw
-A2   |  Pitch
-A3   |  Roll
-     |
-2    |  Trim up Roll
-3    |  Trim down Roll
-4    |  Trim up Pitch
-5    |  Trim down Pitch
-6    |  Trim up Yaw
-7    |  Trim down Yaw
-     |
-8    |  AUX 1
-     |
-10   |  PPM Signal out
-
+<table>
+<thead>
+<tr><th>PIN</th><th>FUNCTION</th></tr>
+</thead>
+<tbody>
+<tr><td>A0</td><td>Throllte
+<tr><td>A1</td><td>Yaw
+<tr><td>A2</td><td>Pitch</td></tr>
+<tr><td>A3</td><td>Roll</td></tr>
+<tr><td>2</td><td>Trim up Roll</td></tr>
+<tr><td>3</td><td>Trim down Roll</td></tr>
+<tr><td>4</td><td>Trim up Pitch</td></tr>
+<tr><td>5</td><td>Trim down Pitch</td></tr>
+<tr><td>6</td><td>Trim up Yaw</td></tr>
+<tr><td>7</td><td>Trim down Yaw</td></tr>
+<tr><td>8</td><td>AUX 1</td></tr>
+<tr>10</td><td>PPM Signal out</td></tr>
+</tbody>
+</table>
 #TODO
 * add buzzer support
 * ass serial out for AUX states
