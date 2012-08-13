@@ -39,7 +39,7 @@ A3   |  Roll
      |
 10   |  PPM Signal out
 
-TODO:
+#TODO
 * add buzzer support
 * ass serial out for AUX states
 * write more documentation ;-)
