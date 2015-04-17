@@ -6,7 +6,7 @@ PPM::PPM(int pinOut, std::vector<Channel> channels, int nrChannels) {
   _pinOut = pinOut;
   _channels = channels;
   _nrChannels = nrChannels;
-  
+
   pinMode(_pinOut, OUTPUT);
 }
 
@@ -15,7 +15,7 @@ void PPM::write() {
   for (std::vector<Channel>::iterator ch = _channels.begin() ; ch != _channels.end(); ++ch) {
     writePulse(ch->getValue());
   }
-  
+
   /* Pad the remaining channels with minimum length pulses */
   for(int i = _channels.size(); i < _nrChannels; ++i) {
     writePulse(MINPULSE);
