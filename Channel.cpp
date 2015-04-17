@@ -12,15 +12,7 @@
  *   
  * @author Chris Landa
  */
-Channel::Channel(int pinIn, int mode) {
-  _pinIn = pinIn;
-  _mode = mode;
 
-  _value = MINPULSE;
-  _trim = false;
-
-  _pInput = new Digital(_pinIn, _mode);
-}
 
 Channel::Channel(int pinIn, bool invert) {
   _pinIn = pinIn;
@@ -32,6 +24,17 @@ Channel::Channel(int pinIn, bool invert) {
   _trim = false;
 
   _pInput = new Analog(_pinIn, _invert);
+}
+
+Channel::Channel(int pinIn, bool invert, int mode) {
+  _pinIn = pinIn;
+  _mode = mode;
+  _invert = invert;
+
+  _value = MINPULSE;
+  _trim = false;
+
+  _pInput = new Digital(_pinIn, _mode);
 }
 
 Channel::Channel(int pinIn, bool invert, int pinTrimUp, int pinTrimDown, int pTrimSave) {

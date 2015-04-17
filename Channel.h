@@ -17,7 +17,7 @@ class Channel {
      * @param pinIn Digital input pin
      * @param mode  Digital channel mode can be ONOFF | TRI
      */
-    Channel(int pinIn, int mode);
+    Channel(int pinIn, bool invert, int mode);
 
     /**
      * @param pinIn  Analog input pin
