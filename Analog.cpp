@@ -4,11 +4,8 @@
 
 /** 
  * Analog.cpp
- * 
- * Represents an analog input
- * 
+ *
  * @author Chris Landa
- * @version 1.0 12.08.2012
  */
 Analog::Analog(int pinIn, bool invert){
   _pinIn = pinIn;

@@ -6,28 +6,9 @@
 #include "Channel.h"
 #include "PPM.h"
 
-/** 
- * TxJoystick.ino
- *
+/**
  * An Arduino based R/C Transmitter for use with a Joystick, Joypad or any other input device
  *
- * @author Chris Landa
- */
-
-/* The number of channels your transmitter supports */
-int nrChannels = 8;
-
-/* Min and max values for the analog inputs */
-int throttleMin = 750;
-int throttleMax = 1590;
-int yawMin = 1050;
-int yawMax = 1620;
-int pitchMin = 800;
-int pitchMax = 1510;
-int rollMin = 900;
-int rollMax = 1550;
-
-/**
  * Default pinouts:
  *
  * A0: Throttle
@@ -44,7 +25,22 @@ int rollMax = 1550;
  *  7: Yaw   -
  *
  * 10: PPM out
+ *
+ * @author Chris Landa
  */
+
+/* The number of channels your transmitter supports */
+int nrChannels = 8;
+
+/* Min and max values for the analog inputs */
+int throttleMin = 750;
+int throttleMax = 1590;
+int yawMin = 1050;
+int yawMax = 1620;
+int pitchMin = 800;
+int pitchMax = 1510;
+int rollMin = 900;
+int rollMax = 1550;
 
 /* Channels 1-4 in order they are listed */
 Channel throttle(A0, true);
@@ -79,6 +75,7 @@ void setup() {
   channels.push_back(pitch);
   channels.push_back(roll);
   channels.push_back(aux1);
+  /* Push additional channels here */
   ppm = new PPM(ppmPin, channels, nrChannels);
 
   // Set Timer Counter Controll Register for Timer1

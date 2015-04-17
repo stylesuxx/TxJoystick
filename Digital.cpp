@@ -4,11 +4,8 @@
 
 /**
  * Digital.cpp
- *
- * Represents a digital input 
  * 
  * @author Chris Landa
- * @version 1.0 12.08.2012
  */
 Digital::Digital(int pinIn, int mode){
   _pinIn = pinIn;
@@ -57,6 +54,7 @@ int Digital::read(){
   return _value;
 }
 
+/* Convert button state to PPM value */
 void Digital::stateToValue(){
   switch(_state){
     case 0: _value = MINPULSE; break;
