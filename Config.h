@@ -10,7 +10,7 @@
 #define ACTIVE HIGH
 
 /* Enable serial debugging */
-#define DEBUG true
+#define DEBUG false
 
 /**
  * Input Modes
@@ -19,9 +19,9 @@
 #define TRI 1
 #define ANALOG -1
 
-/** 
+/**
  * Details about the PPM Pulse
- * 
+ *
  * One PPM Pulse is 700-1700 ms long, after each pulse there comes a 300ms Stop Pulse
  */
 #define MAXPULSE 1700
