@@ -4,7 +4,7 @@ Arduino based R/C PPM transmitter.
 This software was written for the control of a quadrocopter with 4 analog input channels for steering and multiple digital inputs for various other tasks like arming, toggling LED's or switching sensor modes.
 
 ## Features
-* Unlimited nr of channels (only limited by the number of channels supported by your receiver)
+* Support for unlimited number of channels (limited by the number of channels supported by your receiver)
 * Analog inputs are trimmable
 * Digital input for AUX, with two or three states
 * Easy configuration through sketch file: High / Low active, add more channels, set trimmers and limits
@@ -34,4 +34,3 @@ This has been tested on an Arduino Pro Mini 16Mhz/5V but should also work for al
 
 ##TODO's
 * add buzzer support
-* add debugging prints for aux states.
