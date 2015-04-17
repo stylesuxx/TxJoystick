@@ -32,13 +32,22 @@
 /* The number of channels your transmitter supports */
 int nrChannels = 8;
 
-/* Min and max values for the analog inputs */
+/**
+ * Min and max values for the analog inputs
+ *
+ * To get this values you have to find the min and max values read from the analog input.
+ * Move the stick to its maximum positions and note the minimum and maximum values you read
+ * from the analog input.
+ */
 int throttleMin = 750;
 int throttleMax = 1590;
+
 int yawMin = 1050;
 int yawMax = 1620;
+
 int pitchMin = 800;
 int pitchMax = 1510;
+
 int rollMin = 900;
 int rollMax = 1550;
 
