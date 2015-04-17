@@ -39,10 +39,10 @@ int nrChannels = 8;
  * Move the stick to its maximum positions and note the minimum and maximum values you read
  * from the analog input.
  */
-int throttleMin = 750;
-int throttleMax = 1590;
+int throttleMin = 760;
+int throttleMax = 1580;
 
-int yawMin = 1050;
+int yawMin = 1150;
 int yawMax = 1620;
 
 int pitchMin = 800;
@@ -53,15 +53,15 @@ int rollMax = 1550;
 
 /* Channels 1-4 in order they are listed */
 Channel throttle(A0, true);
-Channel yaw(A1, false, 6, 7, 1);
-Channel pitch(A2, true, 4, 5, 10);
-Channel roll(A3, false, 2, 3, 20);
+Channel yaw(A1, false, 6, 7, 10);
+Channel pitch(A2, true, 4, 5, 20);
+Channel roll(A3, false, 2, 3, 30);
 
 /**
  * Feel free to add more AUX channels here but do not forget
  * to push them on the vector in the setup method.
  */
-Channel aux1(8, TRI);
+Channel aux1(8, false, TRI);
 //Channel aux2(0, TRI);
 //Channel aux3(0, ONOFF);
 //Channel aux4(0, ONOFF);
@@ -83,7 +83,7 @@ void setup() {
   channels.push_back(roll);
   channels.push_back(aux1);
   /* Push additional channels here */
-  ppm = new PPM(ppmPin, channels, nrChannels);
+  ppm = new PPM(ppmPin, &channels, nrChannels);
 
   // Set Timer Counter Controll Register for Timer1
   TCCR1A = B00110001;	// Compare register B used in mode '3'
@@ -108,5 +108,11 @@ void setup() {
 void loop() {
   for (std::vector<Channel>::iterator ch = channels.begin() ; ch != channels.end(); ++ch) {
     ch->read();
+    
+    if(DEBUG) {
+      Serial.print(ch->getValue());
+      Serial.print(" ");
+    }
   }
+  if(DEBUG) Serial.println("");
 }
