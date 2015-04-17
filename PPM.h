@@ -10,7 +10,7 @@
  * 
  * @author Chris Landa
  */
-class PPM{
+class PPM {
   public:
     /**
      * @param pinOut     Output pin for the PPM signal

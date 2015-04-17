@@ -11,7 +11,7 @@
  *   
  * @author Chris Landa
  */
-class Channel{
+class Channel {
   public:
     /**
      * @param pinIn Digital input pin

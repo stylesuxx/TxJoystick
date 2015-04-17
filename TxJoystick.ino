@@ -63,10 +63,8 @@ std::vector<Channel> channels;
 PPM* ppm = NULL;
 
 /* Interrupt service routine which is responsible to write the PPM pulse */
-ISR(TIMER1_COMPA_vect){
-  if(ppm) {
-    ppm->write();
-  }
+ISR(TIMER1_COMPA_vect) {
+  if(ppm) ppm->write();
 }
 
 void setup() {
@@ -91,7 +89,8 @@ void setup() {
   pitch.adjust(pitchMin, pitchMax);
   roll.adjust(rollMin, rollMax);
 
-  if(DEBUG){
+  /* If debug mode is enabled we configure the serial port to print debugging messages */
+  if(DEBUG) {
     Serial.begin(115200);
     Serial.println("Debug Mode:");
   }
