@@ -19,7 +19,7 @@ class PPM {
      *                   is higher than the number of active channels, the remaining
      *                   channels are written with the minimal pulse length.
      */
-    PPM(int pinOut, std::vector<Channel> channels, int nrChannels);
+    PPM(int pinOut, std::vector<Channel>* channels, int nrChannels);
 
     /**
      * Write the PPM signal to the output pin
@@ -30,7 +30,7 @@ class PPM {
     void writePulse(int length);
 
     int _pinOut, _nrChannels;
-    std::vector<Channel> _channels;
+    std::vector<Channel>* _channels;
 };
 
 #endif
