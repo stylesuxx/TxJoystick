@@ -12,9 +12,6 @@
 /* Enable serial debugging */
 #define DEBUG true
 
-/* Enable trimming */
-#define TRIM true
-
 /**
  * Input Modes
  */
