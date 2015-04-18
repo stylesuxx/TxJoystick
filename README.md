@@ -31,6 +31,3 @@ This has been tested on an Arduino Pro Mini 16Mhz/5V but should also work for al
     <tr><td>10</td><td>PPM Signal out</td></tr>
   </tbody>
 </table>
-
-##TODO's
-* add buzzer support
