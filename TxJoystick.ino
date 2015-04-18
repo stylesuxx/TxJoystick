@@ -69,13 +69,12 @@ void setup() {
   /* Push additional channels here */
   ppm = new PPM(ppmPin, &channels);
 
-  // Set Timer Counter Controll Register for Timer1
-  TCCR1A = B00110001;	// Compare register B used in mode '3'
-  TCCR1B = B00010010;	// WGM13 and CS11 set to 1
-  TCCR1C = B00000000;	// All set to 0
-
-  TIMSK1 = B00000010;	// Interrupt on compare B
-  OCR1A = 22500;	// 22,5mS PPM output refresh
+  /* Set Timer Counter Controll Register for Timer1 */
+  TCCR1A = B00110001; // Compare register B used in mode '3'
+  TCCR1B = B00010010; // WGM13 and CS11 set to 1
+  TCCR1C = B00000000; // All set to 0
+  TIMSK1 = B00000010; // Interrupt on compare B
+  OCR1A = 22500;      // 22,5mS PPM output refresh
 
   /* If debug mode is enabled we configure the serial port to print debugging messages */
   if(DEBUG) {
