@@ -2,6 +2,7 @@
 #include <vector>
 #include <iterator>
 
+#include "avr/eeprom.h"
 #include "Config.h"
 #include "Channel.h"
 #include "PPM.h"
@@ -9,64 +10,26 @@
 /**
  * An Arduino based R/C Transmitter for use with a Joystick, Joypad or any other input device
  *
- * Default pinouts:
- *
- * A0: Throttle
- * A1: Yaw
- * A2: Pitch
- * A3: Roll
- *  8: Aux 1
- *
- *  2: Roll  +
- *  3: Roll  -
- *  4: Pitch +
- *  5: Pitch -
- *  6: Yaw   +
- *  7: Yaw   -
- *
- * 10: PPM out
- *
  * @author Chris Landa
  */
 
-/* The number of channels your transmitter supports */
-int nrChannels = 8;
-
-/**
- * Min and max values for the analog inputs
- *
- * To get this values you have to find the min and max values read from the analog input.
- * Move the stick to its maximum positions and note the minimum and maximum values you read
- * from the analog input.
- */
-int throttleMin = 760;
-int throttleMax = 1580;
-
-int yawMin = 1150;
-int yawMax = 1620;
-
-int pitchMin = 800;
-int pitchMax = 1510;
-
-int rollMin = 900;
-int rollMax = 1550;
-
 /* Channels 1-4 in order they are listed */
-Channel throttle(A0, true);
-Channel yaw(A1, false, 6, 7, 10);
-Channel pitch(A2, true, 4, 5, 20);
-Channel roll(A3, false, 2, 3, 30);
+Channel throttle(THROTTLE_PIN, true);
+Channel yaw(YAW_PIN, false, YAW_UP_PIN, YAW_DOWN_PIN, 10);
+Channel pitch(PITCH_PIN, true, PITCH_UP_PIN, PITCH_DOWN_PIN, 20);
+Channel roll(ROLL_PIN, false, ROLL_UP_PIN, ROLL_DOWN_PIN, 30);
 
 /**
  * Feel free to add more AUX channels here but do not forget
  * to push them on the vector in the setup method.
  */
-Channel aux1(8, false, TRI);
-//Channel aux2(0, TRI);
-//Channel aux3(0, ONOFF);
-//Channel aux4(0, ONOFF);
+Channel aux1(AUX_1_PIN, false, ONOFF);
+//Channel aux2(AUX_2_PIN, ONOFF);
+//Channel aux3(AUX_3_PIN, TRI);
+//Channel aux4(AUX_4_PIN, TRI);
 
 int ppmPin = 10;
+int buzzerPin = 12;
 
 std::vector<Channel> channels;
 PPM* ppm = NULL;
@@ -77,13 +40,34 @@ ISR(TIMER1_COMPA_vect) {
 }
 
 void setup() {
+  /* Initialize EEPROM for the trims, this only needs to be done once */
+  int zero = 0;
+  eeprom_write_block(&zero, (void*)10, sizeof(int));
+  eeprom_write_block(&zero, (void*)20, sizeof(int));
+  eeprom_write_block(&zero, (void*)30, sizeof(int));
+
+  if(BUZZER) {
+    /* Beep three times to signalize that we are online */
+    for(int i = 0; i < 3; ++i) {
+      digitalWrite(buzzerPin, HIGH);
+      delay(50);
+      digitalWrite(buzzerPin, LOW);
+      delay(50);
+    }
+  }
+
+  throttle.adjust(THROTTLE_MIN, THROTTLE_MAX);
+  yaw.adjust(YAW_MIN, YAW_MAX);
+  pitch.adjust(PITCH_MIN, PITCH_MAX);
+  roll.adjust(ROLL_MIN, ROLL_MAX);
+
   channels.push_back(throttle);
   channels.push_back(yaw);
   channels.push_back(pitch);
   channels.push_back(roll);
   channels.push_back(aux1);
   /* Push additional channels here */
-  ppm = new PPM(ppmPin, &channels, nrChannels);
+  ppm = new PPM(ppmPin, &channels);
 
   // Set Timer Counter Controll Register for Timer1
   TCCR1A = B00110001;	// Compare register B used in mode '3'
@@ -92,11 +76,6 @@ void setup() {
 
   TIMSK1 = B00000010;	// Interrupt on compare B
   OCR1A = 22500;	// 22,5mS PPM output refresh
-
-  throttle.adjust(throttleMin, throttleMax);
-  yaw.adjust(yawMin, yawMax);
-  pitch.adjust(pitchMin, pitchMax);
-  roll.adjust(rollMin, rollMax);
 
   /* If debug mode is enabled we configure the serial port to print debugging messages */
   if(DEBUG) {
@@ -108,11 +87,5 @@ void setup() {
 void loop() {
   for (std::vector<Channel>::iterator ch = channels.begin() ; ch != channels.end(); ++ch) {
     ch->read();
-    
-    if(DEBUG) {
-      Serial.print(ch->getValue());
-      Serial.print(" ");
-    }
   }
-  if(DEBUG) Serial.println("");
 }

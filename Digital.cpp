@@ -20,18 +20,16 @@ Digital::Digital(int pinIn, int mode) {
 
 int Digital::read() {
   int pinValue = digitalRead(_pinIn);
-  bool changed = false;
 
   if(_lastRead != pinValue) {
     _lastRead = pinValue;
 
     if((ACTIVE == HIGH && pinValue == LOW) ||
        (ACTIVE == LOW && pinValue == HIGH)) {
-      changed = true;
-    }
 
-    if(changed) {
       _state = ++_state % 3;
+
+      /* Skip middle position if in ONOFF mode */
       if(_mode == ONOFF && _state == 1) {
         _state++;
       }
