@@ -4,12 +4,12 @@
 #include "Channel.h"
 #include "Input.h"
 
-/** 
+/**
  * Channel.cpp
- * 
+ *
  * Represents a R/C channel
  * Input source may be a plain digital input or analog input with and without trims.
- *   
+ *
  * @author Chris Landa
  */
 
@@ -47,7 +47,7 @@ Channel::Channel(int pinIn, bool invert, int pinTrimUp, int pinTrimDown, int pTr
   _mode = ANALOG;
   _active = HIGH;
   _value = MINPULSE;
-   eeprom_read_block((void*)&_trimValue, (void*)_pTrimSave, sizeof(_trimValue));
+  eeprom_read_block((void*)&_trimValue, (void*)_pTrimSave, sizeof(_trimValue));
 
   _lastDown = -1;
   _lastUp = -1;
@@ -57,7 +57,7 @@ Channel::Channel(int pinIn, bool invert, int pinTrimUp, int pinTrimDown, int pTr
   pinMode(_pinTrimDown, INPUT);
   digitalWrite(_pinTrimDown, ACTIVE);
   pinMode(_pinTrimUp, INPUT);
-  digitalWrite(_pinTrimUp, ACTIVE);  
+  digitalWrite(_pinTrimUp, ACTIVE);
 }
 
 void Channel::read() {
@@ -85,9 +85,16 @@ void Channel::readTrim() {
   int pinDownValue = digitalRead(_pinTrimDown);
   int pinUpValue = digitalRead(_pinTrimUp);
 
-  /* Update the eeprom if the trim value has changed */
-  if(checkChanged(pinUpValue, &_lastUp) || checkChanged(pinDownValue, &_lastDown)) {
-    eeprom_write_block(&_trimValue, (void*)_pTrimSave, sizeof(_trimValue));  
+  if(checkChanged(pinUpValue, &_lastUp)) {
+    _trimValue += 1;
+
+    eeprom_write_block(&_trimValue, (void*)_pTrimSave, sizeof(_trimValue));
+  }
+
+  if(checkChanged(pinDownValue, &_lastDown)) {
+    _trimValue -= 1;
+
+    eeprom_write_block(&_trimValue, (void*)_pTrimSave, sizeof(_trimValue));
   }
 }
 
@@ -95,23 +102,33 @@ bool Channel::checkChanged(int currentValue, int *lastValue) {
   bool changed = false;
 
   if(*lastValue != currentValue) {
-      *lastValue = currentValue;
+    *lastValue = currentValue;
 
-      switch(_active){
-	case HIGH: {
-	  if(currentValue == LOW) {
-	    _trimValue = _trimValue - 1;
-	    changed = true; 
-	  } break;
-	}
-	case LOW: {
-	  if(currentValue == HIGH) {
-	    _trimValue = _trimValue - 1;
-	    changed = true;
-	  } break;
-	}
-	default: break;
+    switch(_active){
+      case HIGH: {
+        if(currentValue == LOW) {
+          changed = true;
+
+          if(BUZZER) {
+            digitalWrite(12, HIGH);
+            delay(50);
+            digitalWrite(12, LOW);
+          }
+        } break;
       }
+      case LOW: {
+        if(currentValue == HIGH) {
+          changed = true;
+
+          if(BUZZER) {
+            digitalWrite(12, HIGH);
+            delay(50);
+            digitalWrite(12, LOW);
+          }
+        } break;
+      }
+      default: break;
+    }
   }
 
   return changed;
