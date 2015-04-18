@@ -27,6 +27,25 @@
 #define PPM_PIN        10
 #define BUZZER_PIN     12
 
+/**
+ * Min and max values for the analog inputs
+ *
+ * To get this values you have to find the min and max values read from the analog input.
+ * Move the stick to its maximum positions and note the minimum and maximum values you read
+ * from the analog input.
+ */
+#define THROTTLE_MIN  28
+#define THROTTLE_MAX 960
+
+#define YAW_MIN 235
+#define YAW_MAX 986
+
+#define PITCH_MIN  64
+#define PITCH_MAX 910
+
+#define ROLL_MIN  31
+#define ROLL_MAX 847
+
 /* The number of channels your transmitter supports */
 #define CHANNELS 8
 
