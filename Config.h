@@ -10,7 +10,10 @@
 #define ACTIVE HIGH
 
 /* Enable serial debugging */
-#define DEBUG false
+#define DEBUG true
+
+/* Enable buzzer */
+ #define BUZZER true
 
 /**
  * Input Modes
