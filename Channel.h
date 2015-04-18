@@ -3,12 +3,12 @@
 #include "Arduino.h"
 #include "Input.h"
 
-/** 
+/**
  * Channel.h
- * 
+ *
  * Represents a R/C channel
  * Input source may be a plain digital input or analog input with and without trims.
- *   
+ *
  * @author Chris Landa
  */
 class Channel {
