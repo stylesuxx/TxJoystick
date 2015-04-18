@@ -12,8 +12,6 @@
  *
  * @author Chris Landa
  */
-
-
 Channel::Channel(int pinIn, bool invert) {
   _pinIn = pinIn;
   _invert = invert;
@@ -110,23 +108,23 @@ bool Channel::checkChanged(int currentValue, int *lastValue) {
           changed = true;
 
           if(BUZZER) {
-            digitalWrite(12, HIGH);
+            digitalWrite(BUZZER_PIN, HIGH);
             delay(50);
-            digitalWrite(12, LOW);
+            digitalWrite(BUZZER_PIN, LOW);
           }
-        } break;
-      }
+        }
+      } break;
       case LOW: {
         if(currentValue == HIGH) {
           changed = true;
 
           if(BUZZER) {
-            digitalWrite(12, HIGH);
+            digitalWrite(BUZZER_PIN, HIGH);
             delay(50);
-            digitalWrite(12, LOW);
+            digitalWrite(BUZZER_PIN, LOW);
           }
-        } break;
-      }
+        }
+      } break;
       default: break;
     }
   }
