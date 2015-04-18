@@ -102,30 +102,15 @@ bool Channel::checkChanged(int currentValue, int *lastValue) {
   if(*lastValue != currentValue) {
     *lastValue = currentValue;
 
-    switch(_active){
-      case HIGH: {
-        if(currentValue == LOW) {
-          changed = true;
+    if((_active == HIGH && currentValue == LOW) ||
+       (_active == LOW && currentValue == HIGH)) {
+      changed = true;
 
-          if(BUZZER) {
-            digitalWrite(BUZZER_PIN, HIGH);
-            delay(50);
-            digitalWrite(BUZZER_PIN, LOW);
-          }
-        }
-      } break;
-      case LOW: {
-        if(currentValue == HIGH) {
-          changed = true;
-
-          if(BUZZER) {
-            digitalWrite(BUZZER_PIN, HIGH);
-            delay(50);
-            digitalWrite(BUZZER_PIN, LOW);
-          }
-        }
-      } break;
-      default: break;
+      if(BUZZER) {
+        digitalWrite(BUZZER_PIN, HIGH);
+        delay(50);
+        digitalWrite(BUZZER_PIN, LOW);
+      }
     }
   }
 
