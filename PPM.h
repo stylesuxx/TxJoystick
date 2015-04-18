@@ -7,7 +7,7 @@
 
 /**
  * PPM.h
- * 
+ *
  * @author Chris Landa
  */
 class PPM {
@@ -15,11 +15,8 @@ class PPM {
     /**
      * @param pinOut     Output pin for the PPM signal
      * @param channels   Pointer to a list of pointers to the single active channels
-     * @param nrChannels The number of channels the transmitter supports. If this
-     *                   is higher than the number of active channels, the remaining
-     *                   channels are written with the minimal pulse length.
      */
-    PPM(int pinOut, std::vector<Channel>* channels, int nrChannels);
+    PPM(int pinOut, std::vector<Channel>* channels);
 
     /**
      * Write the PPM signal to the output pin
