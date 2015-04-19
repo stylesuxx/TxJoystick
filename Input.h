@@ -3,9 +3,9 @@
 
 /**
  * Input.h
- * 
+ *
  * Abstract and deriving classes for analog and digital inputs
- * 
+ *
  * @author Chris Landa
  */
 class Input {
@@ -57,7 +57,7 @@ class Digital : public Input {
 
     /**
      * @return Returns the value read from input pin
-     */ 
+     */
     int read();
 
   private:

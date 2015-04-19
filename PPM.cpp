@@ -2,10 +2,9 @@
 #include "Channel.h"
 #include "PPM.h"
 
-PPM::PPM(int pinOut, std::vector<Channel>* channels, int nrChannels) {
+PPM::PPM(int pinOut, std::vector<Channel>* channels) {
   _pinOut = pinOut;
   _channels = channels;
-  _nrChannels = nrChannels;
 
   pinMode(_pinOut, OUTPUT);
 }
@@ -14,10 +13,16 @@ void PPM::write() {
   /* Write the active channels */
   for (std::vector<Channel>::iterator ch = _channels->begin() ; ch != _channels->end(); ++ch) {
     writePulse(ch->getValue());
+
+    if(DEBUG) {
+      Serial.print(ch->getValue());
+      Serial.print(" ");
+    }
   }
+  if(DEBUG) Serial.println("");
 
   /* Pad the remaining channels with minimum length pulses */
-  for(int i = _channels->size(); i < _nrChannels; ++i) {
+  for(int i = _channels->size(); i < CHANNELS; ++i) {
     writePulse(MINPULSE);
   }
 

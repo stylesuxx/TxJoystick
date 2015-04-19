@@ -4,7 +4,7 @@
 
 /**
  * Digital.cpp
- * 
+ *
  * @author Chris Landa
  */
 Digital::Digital(int pinIn, int mode) {
@@ -20,29 +20,34 @@ Digital::Digital(int pinIn, int mode) {
 
 int Digital::read() {
   int pinValue = digitalRead(_pinIn);
-  bool changed = false;
 
-  if(_lastRead != pinValue) {
+  if(_mode == SWITCH) {
+    _state = 0;
+    if((ACTIVE == HIGH && pinValue == HIGH) ||
+       (ACTIVE == LOW && pinValue == LOW)) {
+      _state = 2;
+    }
+  }
+  else if(_lastRead != pinValue) {
     _lastRead = pinValue;
 
-    switch(ACTIVE) {
-      case HIGH: {
-	if(pinValue == LOW) {
-	  changed = true;
-	} break;
-      }
-      case LOW: {
-	if(pinValue == HIGH) {
-	  changed = true;
-	} break;
-      }
-      default: break;
-    }
+    if((ACTIVE == HIGH && pinValue == LOW) ||
+       (ACTIVE == LOW && pinValue == HIGH)) {
 
-    if(changed) {
       _state = ++_state % 3;
+
+      /* Skip middle position if in ONOFF mode */
       if(_mode == ONOFF && _state == 1) {
-	_state++;
+        _state++;
+      }
+
+      if(BUZZER) {
+        for(int i = 0; i < _state + 1; ++i) {
+          digitalWrite(BUZZER_PIN, HIGH);
+          delay(50);
+          digitalWrite(BUZZER_PIN, LOW);
+          delay(10);
+        }
       }
     }
   }

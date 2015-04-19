@@ -1,4 +1,4 @@
-# TxJoystick 1.1.0
+# TxJoystick 1.2.0
 Arduino based R/C PPM transmitter.
 
 This software was written for the control of a quadrocopter with 4 analog input channels for steering and multiple digital inputs for various other tasks like arming, toggling LED's or switching sensor modes.
@@ -28,9 +28,10 @@ This has been tested on an Arduino Pro Mini 16Mhz/5V but should also work for al
     <tr><td>6</td><td>Trim up Yaw</td></tr>
     <tr><td>7</td><td>Trim down Yaw</td></tr>
     <tr><td>8</td><td>AUX 1</td></tr>
-    <tr><td>10</td><td>PPM Signal out</td></tr>
+    <tr><td>9</td><td>AUX 2</td></tr>
+    <tr><td>11</td><td>AUX 3</td></tr>
+    <tr><td>13</td><td>AUX 4</td></tr>
+    <tr><td>10</td><td>PPM Signal</td></tr>
+    <tr><td>12</td><td>Buzzer</td></tr>
   </tbody>
 </table>
-
-##TODO's
-* add buzzer support
