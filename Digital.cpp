@@ -21,7 +21,14 @@ Digital::Digital(int pinIn, int mode) {
 int Digital::read() {
   int pinValue = digitalRead(_pinIn);
 
-  if(_lastRead != pinValue) {
+  if(_mode == SWITCH) {
+    _state = 0;
+    if((ACTIVE == HIGH && pinValue == HIGH) ||
+       (ACTIVE == LOW && pinValue == LOW)) {
+      _state = 2;
+    }
+  }
+  else if(_lastRead != pinValue) {
     _lastRead = pinValue;
 
     if((ACTIVE == HIGH && pinValue == LOW) ||
