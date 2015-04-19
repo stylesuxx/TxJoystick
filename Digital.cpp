@@ -46,7 +46,7 @@ int Digital::read() {
           digitalWrite(BUZZER_PIN, HIGH);
           delay(50);
           digitalWrite(BUZZER_PIN, LOW);
-          delay(50);
+          delay(10);
         }
       }
     }
