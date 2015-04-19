@@ -50,7 +50,7 @@
 #define CHANNELS 8
 
 /* Enable serial debugging */
-#define DEBUG true
+#define DEBUG false
 
 /* Enable buzzer */
  #define BUZZER true
