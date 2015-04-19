@@ -23,8 +23,8 @@ Channel roll(ROLL_PIN, false, ROLL_UP_PIN, ROLL_DOWN_PIN, 30);
  * Feel free to add more AUX channels here but do not forget
  * to push them on the vector in the setup method.
  */
-Channel aux1(AUX_1_PIN, false, TRI);
-Channel aux2(AUX_2_PIN, false, SWITCH);
+Channel aux1(AUX_1_PIN, false, SWITCH);
+//Channel aux2(AUX_2_PIN, false, SWITCH);
 //Channel aux3(AUX_3_PIN, ONOFF);
 //Channel aux4(AUX_4_PIN, TRI);
 
@@ -53,19 +53,19 @@ void setup() {
     }
   }
 
-  throttle.adjust(THROTTLE_MIN, THROTTLE_MAX);
-  yaw.adjust(YAW_MIN, YAW_MAX);
-  pitch.adjust(PITCH_MIN, PITCH_MAX);
-  roll.adjust(ROLL_MIN, ROLL_MAX);
-
   channels.push_back(throttle);
   channels.push_back(yaw);
   channels.push_back(pitch);
   channels.push_back(roll);
   channels.push_back(aux1);
-  channels.push_back(aux2);
+  //channels.push_back(aux2);
   /* Push additional channels here */
   ppm = new PPM(PPM_PIN, &channels);
+
+  throttle.adjust(THROTTLE_MIN, THROTTLE_MAX);
+  yaw.adjust(YAW_MIN, YAW_MAX);
+  pitch.adjust(PITCH_MIN, PITCH_MAX);
+  roll.adjust(ROLL_MIN, ROLL_MAX);
 
   /* Set Timer Counter Controll Register for Timer1 */
   TCCR1A = B00110001; // Compare register B used in mode '3'
