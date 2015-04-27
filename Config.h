@@ -46,6 +46,15 @@
 #define ROLL_MIN  31
 #define ROLL_MAX 847
 
+#define MIN_MOVEMENT 75
+
+/**
+ * Initializes the eprom for the trims with 0
+ * This needs to be done the first time the board is programmed or when you want
+ * to reset the trims.
+ */
+#define INIT_EEPROM true
+
 /* The number of channels your transmitter supports */
 #define CHANNELS 8
 
@@ -61,11 +70,12 @@
 /**
  * PPM pulse values
  *
- * One PPM Pulse is 700-1700 ms long, after each pulse there comes a 300ms Stop Pulse
+ * One PPM Pulse is 700-1700 microseconds long, after each pulse there comes a 300ms Stop Pulse
  */
-#define MAXPULSE 1700
-#define MINPULSE  700
-#define STOPULSE  300
+#define MAXPULSE    1686
+#define MINPULSE    683
+#define SYNCPULSE   800
+#define STOPULSE    300
 
 /**
  * Input Modes
