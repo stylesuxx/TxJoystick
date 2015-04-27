@@ -73,9 +73,9 @@
  * One PPM Pulse is 700-1700 microseconds long, after each pulse there comes a 300ms Stop Pulse
  */
 #define MAXPULSE    1686
-#define MINPULSE    683
-#define SYNCPULSE   800
-#define STOPULSE    300
+#define MINPULSE     683
+#define SYNCPULSE    800
+#define STOPULSE     300
 
 /**
  * Input Modes
