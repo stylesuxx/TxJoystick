@@ -48,6 +48,11 @@ class Channel {
      */
     void adjust(int min, int max);
 
+    /**
+     * Set the value for center
+     */
+    void readCenter();
+
   private:
     /* Read and update the trimmer values */
     void readTrim();
@@ -63,12 +68,14 @@ class Channel {
     int _mode;
     int _active;
     int _value;
-    int _trimValue;
+    int _center;
+    signed int _trimValue;
     int _lastDown;
     int _lastUp;
     int _pTrimSave;
     bool _trim;
     bool _invert;
+    bool _offset;
 
     Input *_pInput;
 };
