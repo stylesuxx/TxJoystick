@@ -50,8 +50,9 @@
 
 /**
  * Initializes the eprom for the trims with 0
+ *
  * This needs to be done the first time the board is programmed or when you want
- * to reset the trims.
+ * to reset the trims all together.
  */
 #define INIT_EEPROM false
 
@@ -70,11 +71,15 @@
 /**
  * PPM pulse values
  *
- * One PPM Pulse is 700-1700 microseconds long, after each pulse there comes a
- * 300 microseconds Stop Pulse and after that a 800 microsecond sync pulse.
+ * One PPM Pulse is MINPULSE - MAXPULSE microseconds long, after each pulse
+ * a stop pulse of length STOPULSE is sent. After all the channels have been
+ * sent a synch pulse of length SYNCPULSE is sent.
+ *
+ * To adjust min and max pulse value check with a switch AUX and adjust the
+ * values until min and max pulse fit perfectly.
  */
-#define MAXPULSE    1686
-#define MINPULSE     683
+#define MAXPULSE    1679
+#define MINPULSE     676
 #define SYNCPULSE    800
 #define STOPULSE     300
 
