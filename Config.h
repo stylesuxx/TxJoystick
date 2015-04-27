@@ -53,7 +53,7 @@
  * This needs to be done the first time the board is programmed or when you want
  * to reset the trims.
  */
-#define INIT_EEPROM true
+#define INIT_EEPROM false
 
 /* The number of channels your transmitter supports */
 #define CHANNELS 8
@@ -70,7 +70,8 @@
 /**
  * PPM pulse values
  *
- * One PPM Pulse is 700-1700 microseconds long, after each pulse there comes a 300ms Stop Pulse
+ * One PPM Pulse is 700-1700 microseconds long, after each pulse there comes a
+ * 300 microseconds Stop Pulse and after that a 800 microsecond sync pulse.
  */
 #define MAXPULSE    1686
 #define MINPULSE     683
