@@ -31,7 +31,7 @@ void PPM::write() {
    * NOTE: Since delayMicroseconds only works reliably from 3ms up this is not implemened with writePulse(0)
    */
   digitalWrite(_pinOut, LOW);
-  delayMicroseconds(STOPULSE);
+  delayMicroseconds(SYNCPULSE);
   digitalWrite(_pinOut, HIGH);
 }
 
