@@ -11,6 +11,14 @@
 /* The number of channels your transmitter supports */
 #define CHANNELS 8
 
+/**
+ * Initializes the eprom for the trims with 0
+ *
+ * This needs to be done the first time the board is programmed or when you want
+ * to reset the trims all together.
+ */
+#define INIT_EEPROM true
+
 /* Pin configuration */
 #define THROTTLE_PIN   A0
 #define YAW_PIN        A1
@@ -60,7 +68,7 @@
  * ONOFF if you want to switch between low and high with a momentary switch.
  */
 #define AUX_1_ENABLE true
-#define AUX_2_ENABLE false
+#define AUX_2_ENABLE true
 #define AUX_3_ENABLE false
 #define AUX_4_ENABLE false
 
@@ -68,14 +76,6 @@
 #define AUX_2_MODE TRI
 #define AUX_3_MODE ONOFF
 #define AUX_4_MODE ONOFF
-
-/**
- * Initializes the eprom for the trims with 0
- *
- * This needs to be done the first time the board is programmed or when you want
- * to reset the trims all together.
- */
-#define INIT_EEPROM true
 
 /* Enable serial debugging */
 #define DEBUG false
