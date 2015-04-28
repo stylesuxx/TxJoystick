@@ -1,10 +1,23 @@
-#ifndef Config_h
-#define Config_h
+#include "TxJoystick.h"
+
+#ifndef CONFIG_h
+#define CONFIG_h
 /**
  * Configuration definitions
  *
  * @author Chris Landa
  */
+
+/* The number of channels your transmitter supports */
+#define CHANNELS 8
+
+/**
+ * Initializes the eprom for the trims with 0
+ *
+ * This needs to be done the first time the board is programmed or when you want
+ * to reset the trims all together.
+ */
+#define INIT_EEPROM true
 
 /* Pin configuration */
 #define THROTTLE_PIN   A0
@@ -46,8 +59,23 @@
 #define ROLL_MIN  31
 #define ROLL_MAX 847
 
-/* The number of channels your transmitter supports */
-#define CHANNELS 8
+#define MIN_MOVEMENT 75
+
+/**
+ * Enable your AUX here and set the possible states.
+ * AUX mode may either be SWITCH if you have a mechanical switch attached, TRI
+ * if you want to switch between low, mid and high with a momentary switch or
+ * ONOFF if you want to switch between low and high with a momentary switch.
+ */
+#define AUX_1_ENABLE true
+#define AUX_2_ENABLE true
+#define AUX_3_ENABLE false
+#define AUX_4_ENABLE false
+
+#define AUX_1_MODE SWITCH
+#define AUX_2_MODE TRI
+#define AUX_3_MODE ONOFF
+#define AUX_4_MODE ONOFF
 
 /* Enable serial debugging */
 #define DEBUG false
@@ -61,18 +89,16 @@
 /**
  * PPM pulse values
  *
- * One PPM Pulse is 700-1700 ms long, after each pulse there comes a 300ms Stop Pulse
+ * One PPM Pulse is MINPULSE - MAXPULSE microseconds long, after each pulse
+ * a stop pulse of length STOPULSE is sent. After all the channels have been
+ * sent a synch pulse of length SYNCPULSE is sent.
+ *
+ * To adjust min and max pulse value check with a switch AUX and adjust the
+ * values until min and max pulse fit perfectly.
  */
-#define MAXPULSE 1700
-#define MINPULSE  700
-#define STOPULSE  300
-
-/**
- * Input Modes
- */
-#define ONOFF   0
-#define TRI     1
-#define SWITCH  2
-#define ANALOG -1
+#define MAXPULSE    1679
+#define MINPULSE     676
+#define SYNCPULSE    800
+#define STOPULSE     300
 
 #endif

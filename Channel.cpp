@@ -20,6 +20,7 @@ Channel::Channel(int pinIn, bool invert) {
   _active = ANALOG;
   _value = MINPULSE;
   _trim = false;
+  _offset = false;
 
   _pInput = new Analog(_pinIn, _invert);
 }
@@ -31,6 +32,7 @@ Channel::Channel(int pinIn, bool invert, int mode) {
 
   _value = MINPULSE;
   _trim = false;
+  _offset = false;
 
   _pInput = new Digital(_pinIn, _mode);
 }
@@ -47,11 +49,13 @@ Channel::Channel(int pinIn, bool invert, int pinTrimUp, int pinTrimDown, int pTr
   _value = MINPULSE;
   eeprom_read_block((void*)&_trimValue, (void*)_pTrimSave, sizeof(_trimValue));
 
+  _pInput = new Analog(_pinIn, _invert);
+  _offset = false;
+
+  _trim = true;
   _lastDown = -1;
   _lastUp = -1;
-  _trim = true;
 
-  _pInput = new Analog(_pinIn, _invert);
   pinMode(_pinTrimDown, INPUT);
   digitalWrite(_pinTrimDown, ACTIVE);
   pinMode(_pinTrimUp, INPUT);
@@ -66,6 +70,20 @@ void Channel::read() {
 
 int Channel::getValue() {
   int value = _value;
+
+  /* Adjust offset to initial center value */
+  if(_offset) {
+    if(value > (_center + MIN_MOVEMENT)) {
+      value = value - MIN_MOVEMENT;
+    }
+    else if(value < (_center - MIN_MOVEMENT)) {
+      value = value + MIN_MOVEMENT;
+    }
+    else {
+      value = _center;
+    }
+  }
+
   if(_trim) value += _trimValue;
 
   /* Sanitize the value to be within the min and max pulse length */
@@ -77,6 +95,11 @@ int Channel::getValue() {
 
 void Channel::adjust(int min, int max) {
   _pInput->adjust(min, max);
+}
+
+void Channel::readCenter() {
+  _center = _pInput->read();
+  _offset = true;
 }
 
 void Channel::readTrim() {
@@ -110,6 +133,7 @@ bool Channel::checkChanged(int currentValue, int *lastValue) {
         digitalWrite(BUZZER_PIN, HIGH);
         delay(50);
         digitalWrite(BUZZER_PIN, LOW);
+        delay(10);
       }
     }
   }

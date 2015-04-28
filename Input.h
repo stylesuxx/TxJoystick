@@ -1,5 +1,5 @@
-#ifndef Input_h
-#define Input_h
+#ifndef INPUT_h
+#define INPUT_h
 
 /**
  * Input.h

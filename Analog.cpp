@@ -10,7 +10,9 @@
 Analog::Analog(int pinIn, bool invert) {
   _pinIn = pinIn;
   _invert = invert;
+
   _value = MINPULSE;
+
   _adjust = false;
   _adjustMin = 0;
   _adjustMax = 0;

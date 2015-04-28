@@ -26,13 +26,8 @@ void PPM::write() {
     writePulse(MINPULSE);
   }
 
-  /**
-   * Synch pulse
-   * NOTE: Since delayMicroseconds only works reliably from 3ms up this is not implemened with writePulse(0)
-   */
-  digitalWrite(_pinOut, LOW);
-  delayMicroseconds(STOPULSE);
-  digitalWrite(_pinOut, HIGH);
+  /* Write the synch pulse */
+  writePulse(SYNCPULSE);
 }
 
 void PPM::writePulse(int length) {
@@ -40,4 +35,5 @@ void PPM::writePulse(int length) {
   delayMicroseconds(STOPULSE);
   digitalWrite(_pinOut, HIGH);
   delayMicroseconds(length);
+  digitalWrite(_pinOut, LOW);
 }
