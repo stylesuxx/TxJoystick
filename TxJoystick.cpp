@@ -37,19 +37,9 @@ void setup() {
 
   if(INIT_EEPROM) {
     signed int zero = 0;
-    eeprom_write_block(&zero, (void *)0, sizeof(signed int));
-    eeprom_write_block(&zero, (void *)2, sizeof(signed int));
-    eeprom_write_block(&zero, (void *)4, sizeof(signed int));
-  }
-
-  if(BUZZER) {
-    /* Beep three times to signalize that we are online */
-    for(int i = 0; i < 3; ++i) {
-      digitalWrite(BUZZER_PIN, HIGH);
-      delay(50);
-      digitalWrite(BUZZER_PIN, LOW);
-      delay(50);
-    }
+    eeprom_write_block(&zero, (void *) 0, sizeof(signed int));
+    eeprom_write_block(&zero, (void *) 2, sizeof(signed int));
+    eeprom_write_block(&zero, (void *) 4, sizeof(signed int));
   }
 
   /* Channels 1-4 in order they are listed */
@@ -93,6 +83,16 @@ void setup() {
   }
 
   ppm = new PPM(PPM_PIN, &channels);
+
+  if(BUZZER) {
+    /* Beep three times to signalize that the controlls are ready */
+    for(int i = 0; i < 3; ++i) {
+      digitalWrite(BUZZER_PIN, HIGH);
+      delay(50);
+      digitalWrite(BUZZER_PIN, LOW);
+      delay(50);
+    }
+  }
 }
 
 void loop() {
