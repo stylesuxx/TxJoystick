@@ -10,6 +10,7 @@
 Digital::Digital(int pinIn, int mode) {
   _pinIn = pinIn;
   _mode = mode;
+
   _value = MINPULSE;
   _state = 0;
   _lastRead = 2;
@@ -61,7 +62,7 @@ int Digital::read() {
 void Digital::stateToValue() {
   switch(_state){
     case 0: _value = MINPULSE; break;
-    case 1: _value = MINPULSE + ((MAXPULSE - MINPULSE)/2); break;
+    case 1: _value = MINPULSE + ((MAXPULSE - MINPULSE) / 2); break;
     case 2: _value = MAXPULSE; break;
     default: break;
   }

@@ -73,7 +73,6 @@ int Channel::getValue() {
 
   /* Adjust offset to initial center value */
   if(_offset) {
-    //Serial.println("off");
     if(value > (_center + MIN_MOVEMENT)) {
       value = value - MIN_MOVEMENT;
     }
@@ -134,7 +133,7 @@ bool Channel::checkChanged(int currentValue, int *lastValue) {
         digitalWrite(BUZZER_PIN, HIGH);
         delay(50);
         digitalWrite(BUZZER_PIN, LOW);
-        delay(50);
+        delay(10);
       }
     }
   }
