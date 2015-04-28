@@ -1,10 +1,23 @@
-#ifndef Config_h
-#define Config_h
+#include "TxJoystick.h"
+
+#ifndef CONFIG_h
+#define CONFIG_h
 /**
  * Configuration definitions
  *
  * @author Chris Landa
  */
+
+/* The number of channels your transmitter supports */
+#define CHANNELS 8
+
+/**
+ * Initializes the eprom for the trims with 0
+ *
+ * This needs to be done the first time the board is programmed or when you want
+ * to reset the trims all together.
+ */
+#define INIT_EEPROM true
 
 /* Pin configuration */
 #define THROTTLE_PIN   A0
@@ -49,15 +62,20 @@
 #define MIN_MOVEMENT 75
 
 /**
- * Initializes the eprom for the trims with 0
- *
- * This needs to be done the first time the board is programmed or when you want
- * to reset the trims all together.
+ * Enable your AUX here and set the possible states.
+ * AUX mode may either be SWITCH if you have a mechanical switch attached, TRI
+ * if you want to switch between low, mid and high with a momentary switch or
+ * ONOFF if you want to switch between low and high with a momentary switch.
  */
-#define INIT_EEPROM false
+#define AUX_1_ENABLE true
+#define AUX_2_ENABLE true
+#define AUX_3_ENABLE false
+#define AUX_4_ENABLE false
 
-/* The number of channels your transmitter supports */
-#define CHANNELS 8
+#define AUX_1_MODE SWITCH
+#define AUX_2_MODE TRI
+#define AUX_3_MODE ONOFF
+#define AUX_4_MODE ONOFF
 
 /* Enable serial debugging */
 #define DEBUG false
@@ -82,13 +100,5 @@
 #define MINPULSE     676
 #define SYNCPULSE    800
 #define STOPULSE     300
-
-/**
- * Input Modes
- */
-#define ONOFF   0
-#define TRI     1
-#define SWITCH  2
-#define ANALOG -1
 
 #endif

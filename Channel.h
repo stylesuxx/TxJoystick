@@ -1,5 +1,5 @@
-#ifndef Channel_h
-#define Channel_h
+#ifndef CHANNEL_h
+#define CHANNEL_h
 #include "Arduino.h"
 #include "Input.h"
 
