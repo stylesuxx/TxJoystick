@@ -1,7 +1,7 @@
 #ifndef TXJOYSTICK_H_
 #define TXJOYSTICK_H_
 
-#define VERSION 120
+#define VERSION 130
 
 /**
  * Input Modes
