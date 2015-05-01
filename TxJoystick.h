@@ -1,14 +1,15 @@
+#include "Arduino.h"
+
 #ifndef TXJOYSTICK_H_
 #define TXJOYSTICK_H_
 
 #define VERSION 130
 
-/**
- * Input Modes
- */
-#define ONOFF   0
-#define TRI     1
-#define SWITCH  2
-#define ANALOG -1
+enum auxMode {
+  DIGITAL_ONOFF,
+  DIGITAL_TRI,
+  SWITCH_ONOFF,
+  SWITCH_TRI
+};
 
 #endif

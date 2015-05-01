@@ -14,9 +14,9 @@ class PPM {
   public:
     /**
      * @param pinOut     Output pin for the PPM signal
-     * @param channels   Pointer to a list of pointers to the single active channels
+     * @param channels   Pointer to a list of pointers to the active channels
      */
-    PPM(int pinOut, std::vector<Channel>* channels);
+    PPM(int pin, std::vector<Channel *>channels);
 
     /**
      * Write the PPM signal to the output pin
@@ -26,8 +26,8 @@ class PPM {
   private:
     void writePulse(int length);
 
-    int _pinOut, _nrChannels;
-    std::vector<Channel>* _channels;
+    int _pin;
+    std::vector<Channel *>_channels;
 };
 
 #endif
