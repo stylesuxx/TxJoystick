@@ -7,6 +7,8 @@ Aux::Aux(int pin, auxMode mode) {
   _last = 2;
   _pause = 0;
 
+  _pulse = MINPULSE;
+
   if(ENABLE_PULLUPS) pinMode(_pin, INPUT_PULLUP);
   else pinMode(_pin, INPUT);
 }
@@ -72,16 +74,15 @@ void Aux::read() {
       _state = 0;
     }
   }
+
+  switch(_state){
+    case 0: _pulse = MINPULSE; break;
+    case 1: _pulse = MINPULSE + ((MAXPULSE - MINPULSE) / 2); break;
+    case 2: _pulse = MAXPULSE; break;
+    default: break;
+  }
 }
 
 int Aux::getPulse() {
-  int pulse = MINPULSE;
-  switch(_state){
-    case 0: pulse = MINPULSE; break;
-    case 1: pulse = MINPULSE + ((MAXPULSE - MINPULSE) / 2); break;
-    case 2: pulse = MAXPULSE; break;
-    default: break;
-  }
-
-  return pulse;
+  return _pulse;
 }
