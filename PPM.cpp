@@ -9,6 +9,10 @@ PPM::PPM(int pin, std::vector<Channel *>channels) {
   pinMode(_pin, OUTPUT);
 }
 
+/**
+ * This method is called in the ISR we need to make sure that we handle
+ * everything as fast as possible.
+ */
 void PPM::write() {
   /* Write the active channels */
   std::vector<Channel *>::iterator iter = _channels.begin();
