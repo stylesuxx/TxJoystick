@@ -83,6 +83,8 @@ class Steering: public Channel {
     bool _isAdjustable;
     int _min;
     int _max;
+
+    int _pulse;
 };
 
 #endif

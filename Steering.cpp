@@ -14,7 +14,9 @@ Steering::Steering(int pin, bool invert) {
   _isCentered = false;
   _isAdjustable = false;
 
-  _value = MINPULSE;
+  _value = 0;
+
+  _pulse = MINPULSE;
 }
 
 Steering::Steering(int pin, bool invert, int pinTrimUp, int pinTrimDown, int trimSave) {
@@ -29,7 +31,9 @@ Steering::Steering(int pin, bool invert, int pinTrimUp, int pinTrimDown, int tri
   _isCentered = false;
   _isAdjustable = false;
 
-  _value = MINPULSE;
+  _value = 0;
+
+  _pulse = MINPULSE;
 
   if(ENABLE_PULLUPS) {
     pinMode(_pinTrimDown, INPUT_PULLUP);
@@ -45,11 +49,8 @@ void Steering::read() {
   _value = analogRead(_pin);
 
   if(_isTrimmable) readTrims();
-}
 
-int Steering::getPulse() {
   int current = _value;
-
   if(_isCentered) {
     if(current > (_center + MIN_MOVEMENT)) {
       current = current - MIN_MOVEMENT;
@@ -80,7 +81,11 @@ int Steering::getPulse() {
   if(current < MINPULSE) current = MINPULSE;
   if(current > MAXPULSE) current = MAXPULSE;
 
-  return current;
+  _pulse = current;
+}
+
+int Steering::getPulse() {
+  return _pulse;
 }
 
 void Steering::adjust(int min, int max) {
