@@ -45,8 +45,6 @@ void Aux::read() {
           _pause = 500;
         }
       }
-
-      return;
     } break;
 
     /**
@@ -59,11 +57,10 @@ void Aux::read() {
          (ACTIVE == LOW  && value == LOW)) {
 
         _state = 2;
-        return;
       }
-
-      _state = 0;
-      return;
+      else {
+        _state = 0;
+      }
     } break;
 
     case SWITCH_TRI: {

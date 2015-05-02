@@ -41,7 +41,7 @@ class Aux: public Channel {
     int _pause;
     auxMode _mode;
 
-    int pulse;
+    int _pulse;
 };
 
 #endif
