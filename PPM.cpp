@@ -2,27 +2,26 @@
 #include "Channel.h"
 #include "PPM.h"
 
-PPM::PPM(int pinOut, std::vector<Channel>* channels) {
-  _pinOut = pinOut;
+PPM::PPM(int pin, std::vector<Channel *>channels) {
+  _pin = pin;
   _channels = channels;
 
-  pinMode(_pinOut, OUTPUT);
+  pinMode(_pin, OUTPUT);
 }
 
+/**
+ * This method is called in the ISR we need to make sure that we handle
+ * everything as fast as possible.
+ */
 void PPM::write() {
   /* Write the active channels */
-  for (std::vector<Channel>::iterator ch = _channels->begin() ; ch != _channels->end(); ++ch) {
-    writePulse(ch->getValue());
-
-    if(DEBUG) {
-      Serial.print(ch->getValue());
-      Serial.print(" ");
-    }
+  std::vector<Channel *>::iterator iter = _channels.begin();
+  for (iter; iter != _channels.end(); ++iter) {
+    writePulse((*iter)->getPulse());
   }
-  if(DEBUG) Serial.println("");
 
   /* Pad the remaining channels with minimum length pulses */
-  for(int i = _channels->size(); i < CHANNELS; ++i) {
+  for(int i = _channels.size(); i < CHANNELS; ++i) {
     writePulse(MINPULSE);
   }
 
@@ -31,9 +30,9 @@ void PPM::write() {
 }
 
 void PPM::writePulse(int length) {
-  digitalWrite(_pinOut, LOW);
+  digitalWrite(_pin, LOW);
   delayMicroseconds(STOPULSE);
-  digitalWrite(_pinOut, HIGH);
+  digitalWrite(_pin, HIGH);
   delayMicroseconds(length);
-  digitalWrite(_pinOut, LOW);
+  digitalWrite(_pin, LOW);
 }
