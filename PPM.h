@@ -7,8 +7,6 @@
 
 /**
  * PPM.h
- *
- * @author Chris Landa
  */
 class PPM {
   public:

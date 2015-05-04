@@ -10,8 +10,6 @@
  *
  * Every channel needs to implement a read method which is called in the loop
  * and a getPulse method to return the pulse length to be written.
- *
- * @author Chris Landa
  */
 class Channel {
   public:

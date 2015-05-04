@@ -12,8 +12,6 @@
  *
  * An AUX channel may either be an analog input with 3 states or a digital input
  * attached to a switch with on off state or to a button with 2 or 3 states.
- *
- * @author Chris Landa
  */
 class Aux: public Channel {
   public:

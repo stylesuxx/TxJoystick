@@ -12,9 +12,8 @@
 #include "PPM.h"
 
 /**
- * An Arduino based R/C Transmitter for use with a Joystick, Joypad or any other input device
- *
- * @author Chris Landa
+ * An Arduino based R/C Transmitter for use with a Joystick, Joypad or any other
+ * input device.
  */
 
 std::vector<Channel *> channels;

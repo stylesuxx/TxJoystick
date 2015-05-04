@@ -12,8 +12,6 @@
  *
  * A steering channel has to be attached to an analog pin. There are two types
  * of steering channels, once that are trimmable and the once that are not.
- *
- * @author Chris Landa
  */
 class Steering: public Channel {
   public:

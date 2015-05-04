@@ -3,8 +3,6 @@
 
 /**
  * Analog.cpp
- *
- * @author Chris Landa
  */
 Steering::Steering(int pin, bool invert) {
   _pin = pin;
