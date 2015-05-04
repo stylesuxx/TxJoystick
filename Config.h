@@ -68,7 +68,7 @@
  */
 #define THROTTLE_INVERT true
 #define YAW_INVERT      false
-#define PITCH_INVERT    false
+#define PITCH_INVERT    true
 #define ROLL_INVERT     false
 
 /**
