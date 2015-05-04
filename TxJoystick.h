@@ -3,7 +3,7 @@
 #ifndef TXJOYSTICK_H_
 #define TXJOYSTICK_H_
 
-#define VERSION 130
+#define VERSION 140
 
 enum auxMode {
   DIGITAL_ONOFF,
